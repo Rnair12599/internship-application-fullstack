@@ -18,7 +18,9 @@ class ElementHandler {
     }
     else if(element.tagName === 'p' && (element.getAttribute('id') == "description")  ){
       console.log(`Incoming element: p#description`);
-      element.setInnerContent(`for Rahul Nair`);
+      element.setInnerContent(`Rahul Nair's variant page for
+       the fullstack internship application at Cloudflare!
+       Clear cookies or open page in incognito to encounter the other variant page.`);
     }
     else if(element.tagName === 'a' && (element.getAttribute('id') == "url")  ){
       console.log(`Incoming element: a#urls`);
@@ -63,8 +65,13 @@ async function handleRequest(request) {
     val = 1;
   }
   else{
-    let d = new Date();
-    val = d.getTime() % 2;
+    float = Math.random();
+    if(float < 0.5){
+      val = 0;
+    }
+    else{
+      val = 1;
+    }
   }
 
 
@@ -81,7 +88,7 @@ async function handleRequest(request) {
     .on('p#description', new ElementHandler())
     .on('a#url', new ElementHandler())
     .transform(varResponse);
-  
+
 
 
   newPage = htmlrewriter.body;
